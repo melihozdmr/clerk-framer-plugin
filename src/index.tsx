@@ -12,13 +12,8 @@ interface Props {
     primaryColor?: string
     borderRadius?: number
     showLoadingState?: boolean
-    buttonText?: string
     redirectUrl?: string
     allowSignUp?: boolean
-    socialButtonsVariant?: "iconButton" | "blockButton"
-    onSignInSuccess?: () => void
-    onSignUpSuccess?: () => void
-    onSignOutSuccess?: () => void
 }
 
 const defaultStyles = {
@@ -79,36 +74,9 @@ const ClerkComponent: React.FC<Props> = (props) => {
     const { 
         mode, 
         showLoadingState,
-        buttonText,
         redirectUrl,
         allowSignUp,
-        socialButtonsVariant,
-        onSignInSuccess,
-        onSignUpSuccess,
-        onSignOutSuccess
     } = props
-
-    React.useEffect(() => {
-        if (!clerk.loaded) return
-
-        // Setup event listeners
-        const signInListener = clerk.addListener((event: any) => {
-            if (event.user && onSignInSuccess) {
-                onSignInSuccess()
-            }
-        })
-
-        const signUpListener = clerk.addListener((event: any) => {
-            if (event.user && onSignUpSuccess) {
-                onSignUpSuccess()
-            }
-        })
-
-        return () => {
-            signInListener()
-            signUpListener()
-        }
-    }, [clerk.loaded, onSignInSuccess, onSignUpSuccess])
 
     if (!clerk.loaded && showLoadingState) {
         return <LoadingSpinner />
@@ -154,7 +122,6 @@ export default function ClerkAuth(props: Props) {
         appearance = "light",
         primaryColor = "#3B82F6",
         borderRadius = 8,
-        buttonText,
     } = props
 
     if (!publishableKey) {
@@ -258,11 +225,6 @@ addPropertyControls(ClerkAuth, {
         title: "Show Loading",
         defaultValue: true,
     },
-    buttonText: {
-        type: ControlType.String,
-        title: "Button Text",
-        defaultValue: "",
-    },
     redirectUrl: {
         type: ControlType.String,
         title: "Redirect URL",
@@ -272,20 +234,5 @@ addPropertyControls(ClerkAuth, {
         type: ControlType.Boolean,
         title: "Allow Sign Up",
         defaultValue: true,
-    },
-    socialButtonsVariant: {
-        type: ControlType.Enum,
-        title: "Social Buttons",
-        options: ["iconButton", "blockButton"],
-        defaultValue: "iconButton",
-    },
-    onSignInSuccess: {
-        type: ControlType.EventHandler,
-    },
-    onSignUpSuccess: {
-        type: ControlType.EventHandler,
-    },
-    onSignOutSuccess: {
-        type: ControlType.EventHandler,
-    },
+    }
 }) 

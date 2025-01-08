@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 
 // Mock createPortal for React components that use it
-const mockCreatePortal = jest.fn((element, container) => {
+const mockCreatePortal = jest.fn((element) => {
     return element
 })
 
