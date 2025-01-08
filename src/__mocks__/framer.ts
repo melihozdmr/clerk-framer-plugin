@@ -1,10 +1,15 @@
-export const addPropertyControls = jest.fn()
+const addPropertyControls = jest.fn()
 
-export enum ControlType {
+enum ControlType {
     String = "string",
     Number = "number",
     Boolean = "boolean",
     Enum = "enum",
     Color = "color",
     EventHandler = "eventhandler"
+}
+
+module.exports = {
+    addPropertyControls,
+    ControlType
 } 

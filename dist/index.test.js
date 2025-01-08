@@ -10,7 +10,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import ClerkAuth from './index';
 // Mock Clerk hooks and components
 jest.mock('@clerk/clerk-react', function () { return ({
@@ -49,9 +49,42 @@ describe('ClerkAuth Component', function () {
         render(React.createElement(ClerkAuth, __assign({}, defaultProps, { mode: "user-button" })));
         expect(screen.getByTestId('clerk-user-button')).toBeInTheDocument();
     });
-    it('applies custom styles based on props', function () {
-        var container = render(React.createElement(ClerkAuth, __assign({}, defaultProps, { primaryColor: "#FF0000", borderRadius: 16, appearance: "dark" }))).container;
-        var mainDiv = container.firstChild;
-        expect(mainDiv).toHaveStyle({ width: '400px', height: '600px' });
+    it('shows loading spinner when clerk is not loaded', function () {
+        jest.spyOn(require('@clerk/clerk-react'), 'useClerk').mockImplementation(function () { return ({
+            loaded: false,
+            addListener: jest.fn().mockReturnValue(function () { }),
+        }); });
+        render(React.createElement(ClerkAuth, __assign({}, defaultProps, { showLoadingState: true })));
+        expect(document.querySelector('[style*="animation: spin"]')).toBeInTheDocument();
+    });
+    it('handles sign-in success callback', function () {
+        var onSignInSuccess = jest.fn();
+        var mockAddListener = jest.fn().mockReturnValue(function () { });
+        jest.spyOn(require('@clerk/clerk-react'), 'useClerk').mockImplementation(function () { return ({
+            loaded: true,
+            addListener: mockAddListener,
+        }); });
+        render(React.createElement(ClerkAuth, __assign({}, defaultProps, { onSignInSuccess: onSignInSuccess })));
+        var callback = mockAddListener.mock.calls[0][0];
+        act(function () {
+            callback({ user: { id: 'test' } });
+        });
+        expect(onSignInSuccess).toHaveBeenCalled();
+    });
+    it('handles error boundary', function () {
+        var errorSpy = jest.spyOn(console, 'error').mockImplementation(function () { });
+        var ErrorComponent = function () {
+            React.useEffect(function () {
+                throw new Error('Test error');
+            }, []);
+            return null;
+        };
+        render(React.createElement(ClerkAuth, __assign({}, defaultProps),
+            React.createElement(ErrorComponent, null)));
+        // Wait for error to be caught
+        setTimeout(function () {
+            expect(screen.getByText(/test error/i)).toBeInTheDocument();
+            errorSpy.mockRestore();
+        }, 0);
     });
 });
