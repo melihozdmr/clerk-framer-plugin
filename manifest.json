@@ -1,0 +1,14 @@
+{
+  "name": "Clerk Authentication",
+  "description": "Clerk.com authentication integration for Framer",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "author": {
+    "name": "Your Name",
+    "email": "your.email@example.com"
+  },
+  "pluginDependencies": {
+    "@clerk/clerk-react": "^4.0.0"
+  }
+} 

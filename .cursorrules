@@ -1,0 +1,67 @@
+# Cursor.ai Plugin Documentation
+
+## Project Overview
+This project involves creating a Framer plugin that integrates Clerk.com's authentication system into Framer. The plugin will follow the guidelines provided in the [Framer Developers Documentation](https://www.framer.com/developers/plugins/introduction). Each step of development will use a linting system to check for errors before proceeding to the next stage.
+
+---
+
+## Tasks
+
+### Task 1: Review Framer Developer Documentation
+- **Action**: Go through the Framer Developers Documentation page by page to understand plugin structure, APIs, and integration methods.
+- **Status**: In Progress
+- **Notes**: 
+  - İncelenen konular:
+    - Plugin yapısı ve yaşam döngüsü
+    - Property kontrolleri
+    - Framer API'leri
+    - Entegrasyon yöntemleri
+  - Tamamlanma: %25
+
+### Task 2: Define Plugin Goals and Scope
+- **Action**: Create a high-level plan for integrating Clerk.com's authentication system into Framer.
+- **Status**: Pending
+- **Notes**: Include details on expected features and user flows for the plugin.
+
+### Task 3: Initialize Framer Plugin Project
+- **Action**: Set up the initial Framer plugin project using the Framer CLI.
+- **Status**: Pending
+- **Notes**: Validate with the linting system to ensure the project structure is error-free.
+
+### Task 4: Integrate Clerk.com Authentication
+- **Action**: Implement Clerk.com's authentication system as part of the plugin.
+- **Status**: Pending
+- **Notes**: Follow Clerk.com and Framer integration best practices.
+
+### Task 5: Add Linting System
+- **Action**: Incorporate a linting system to check for errors at each stage of development.
+- **Status**: Pending
+- **Notes**: Use ESLint or a similar tool compatible with Framer plugins.
+
+### Task 6: Test Plugin Functionality
+- **Action**: Perform end-to-end testing of the plugin within Framer.
+- **Status**: Pending
+- **Notes**: Ensure all user scenarios are covered.
+
+### Task 7: Prepare Documentation
+- **Action**: Write comprehensive user documentation for the plugin.
+- **Status**: Pending
+- **Notes**: Include setup instructions, features, and troubleshooting tips.
+
+### Task 8: Publish Plugin
+- **Action**: Publish the plugin to the Framer plugin store.
+- **Status**: Pending
+- **Notes**: Follow submission guidelines from Framer Developers Documentation.
+
+---
+
+## Development Notes
+- Always use the linting system before moving to the next step.
+- Refer back to the Framer Developers Documentation for any clarifications.
+- Document each task in this file.
+
+---
+
+### Current Task Progress
+- Task 1 başlatıldı ve devam ediyor
+- Framer dokümantasyonu inceleniyor
